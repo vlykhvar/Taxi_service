@@ -46,7 +46,7 @@ public class Car {
     }
 
     private long setId() {
-            return (long) Storage.listCar.size() + 1;
+return -1;
     }
 
     @Override

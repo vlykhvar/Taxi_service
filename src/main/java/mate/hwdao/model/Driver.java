@@ -59,10 +59,6 @@ public class Driver {
     }
 
     private long setId() {
-        if(Storage.listDriver.size() == 0) {
-            return 1;
-        } else {
-            return Storage.listDriver.size() + 1;
-        }
+            return -1;
     }
 }
