@@ -8,11 +8,6 @@ public class Manufacturer {
     private String name;
     private String country;
 
-    public Manufacturer(){
-        id = setId();
-        this.name = "name";
-        this.country = "country";
-    }
     public Manufacturer(String name, String country) {
     id = setId();
     this.name = name;
@@ -40,11 +35,7 @@ public class Manufacturer {
     }
 
     private long setId() {
-        if(Storage.listManufacturer.size() == 0) {
-            return 1;
-        } else {
             return Storage.listManufacturer.size() + 1;
-        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package mate.hwdao.service;
 
 import java.util.List;
 import mate.hwdao.dao.ManufacturerDao;
+import mate.hwdao.db.Storage;
 import mate.hwdao.lib.Inject;
 import mate.hwdao.lib.Service;
 import mate.hwdao.model.Manufacturer;
@@ -13,7 +14,8 @@ public class ManufacturerServiceImpl implements ManufacturerService{
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        return manufacturerDao.create(manufacturer);
+        manufacturerDao.create(manufacturer);
+        return manufacturer;
     }
 
     @Override

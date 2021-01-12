@@ -4,10 +4,13 @@ import java.util.List;
 import mate.hwdao.model.Manufacturer;
 
 public interface ManufacturerService {
+    Manufacturer create(Manufacturer manufacturer);
 
-    public Manufacturer create(Manufacturer manufacturer);
-    public Manufacturer get(Long id);
-    public List<Manufacturer> getAll();
-    public Manufacturer update(Manufacturer manufacturer);
-    public boolean delete(Long id);
+    Manufacturer get(Long id);
+
+    List<Manufacturer> getAll();
+
+    Manufacturer update(Manufacturer manufacturer);
+
+    boolean delete(Long id);
 }

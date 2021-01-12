@@ -9,7 +9,6 @@ import mate.hwdao.model.Manufacturer;
 
 @Dao
 public class ManufactureDaoImpl implements ManufacturerDao {
-
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
         Storage.listManufacturer.add(manufacturer);
@@ -18,7 +17,7 @@ public class ManufactureDaoImpl implements ManufacturerDao {
 
     @Override
     public Optional<Manufacturer> get(Long id) {
-        return Optional.of(Storage.listManufacturer.stream().filter(x -> x.getId().equals(id)).findFirst().get());
+        return Optional.ofNullable(Storage.listManufacturer.stream().filter(x -> x.getId().equals(id)).findFirst().get());
     }
 
     @Override
@@ -28,6 +27,12 @@ public class ManufactureDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
+        for (Manufacturer manufacturer1 : Storage.listManufacturer) {
+            if (manufacturer.getId().equals(manufacturer.getId())) {
+                manufacturer1 = manufacturer;
+                return manufacturer;
+            }
+        }
         return null;
     }
 
