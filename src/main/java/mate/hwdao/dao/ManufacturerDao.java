@@ -5,7 +5,6 @@ import java.util.Optional;
 import mate.hwdao.model.Manufacturer;
 
 public interface ManufacturerDao {
-
     public Manufacturer create(Manufacturer manufacturer);
     public Optional<Manufacturer> get(Long id);
     public List<Manufacturer> getAll();

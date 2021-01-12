@@ -1,4 +1,4 @@
-package mate.hwdao.dao.Impl;
+package mate.hwdao.dao.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,5 +35,4 @@ public class ManufactureDaoImpl implements ManufacturerDao {
     public boolean delete(Long id) {
         return Storage.listManufacturer.remove(Storage.listManufacturer.stream().filter(x -> x.getId().equals(id)).findFirst().get());
     }
-
 }
