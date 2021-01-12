@@ -10,11 +10,9 @@ import mate.hwdao.model.Manufacturer;
 public class ManufacturerServiceImpl implements ManufacturerService {
     @Inject
     private ManufacturerDao manufacturerDao;
-    private long countId = 0;
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        manufacturer.setId(++countId);
         manufacturerDao.create(manufacturer);
         return manufacturer;
     }
