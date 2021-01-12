@@ -1,14 +1,13 @@
 package mate.hwdao.model;
 
 import java.util.Objects;
-import mate.hwdao.db.Storage;
 
 public class Driver {
     private Long id;
     private String name;
     private String licenseNumber;
 
-    public Driver (String name, String licenseNumber){
+    public Driver(String name, String licenseNumber) {
         id = setId();
         this.name = name;
         this.licenseNumber = licenseNumber;
@@ -36,8 +35,12 @@ public class Driver {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Driver driver = (Driver) o;
         return Objects.equals(id, driver.id)
                 && Objects.equals(name, driver.name)
@@ -51,14 +54,14 @@ public class Driver {
 
     @Override
     public String toString() {
-        return "Driver{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", licenseNumber='" + licenseNumber + '\'' +
-                '}';
+        return "Driver{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", licenseNumber='" + licenseNumber + '\''
+                + '}';
     }
 
     private long setId() {
-            return -1;
+        return -1;
     }
 }

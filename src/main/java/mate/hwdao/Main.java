@@ -15,14 +15,18 @@ public class Main {
     private static ManufacturerServiceImpl manufacturerService;
 
     public static void main(String[] args) {
-        ManufacturerService manufacturerService = (ManufacturerService) injector.getInstance(ManufacturerService.class);
+        ManufacturerService manufacturerService
+                = (ManufacturerService) injector.getInstance(ManufacturerService.class);
         Manufacturer manufacturerHonda = new Manufacturer("Honda", "Jupan");
         manufacturerService.create(manufacturerHonda);
         Manufacturer manufacturerZaz = new Manufacturer("ZAZ", "Ukraine");
         manufacturerService.create(manufacturerZaz);
-        System.out.println("How to work manufacturer service.create: " + manufacturerZaz.toString());
-        System.out.println("How to work manufacturer service.getAll: " + manufacturerService.getAll().toString());
-        System.out.println("How to work manufacturer service.getId: " + manufacturerService.get(manufacturerHonda.getId()).toString());
+        System.out.println("How to work manufacturer service.create: "
+                + manufacturerZaz.toString());
+        System.out.println("How to work manufacturer service.getAll: "
+                + manufacturerService.getAll().toString());
+        System.out.println("How to work manufacturer service.getId: "
+                + manufacturerService.get(manufacturerHonda.getId()).toString());
         manufacturerService.update(manufacturerHonda).setCountry("Japan");
         System.out.println("After change country: " + manufacturerHonda.toString());
         manufacturerService.delete(manufacturerHonda.getId());

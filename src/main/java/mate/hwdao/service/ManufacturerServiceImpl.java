@@ -7,7 +7,7 @@ import mate.hwdao.lib.Service;
 import mate.hwdao.model.Manufacturer;
 
 @Service
-public class ManufacturerServiceImpl implements ManufacturerService{
+public class ManufacturerServiceImpl implements ManufacturerService {
     @Inject
     private ManufacturerDao manufacturerDao;
     private long countId = 0;
@@ -21,13 +21,13 @@ public class ManufacturerServiceImpl implements ManufacturerService{
 
     @Override
     public Manufacturer get(Long id) {
-       return manufacturerDao.get(id)
+        return manufacturerDao.get(id)
                .orElseThrow(() -> new RuntimeException("Can't find " + id));
     }
 
     @Override
     public List<Manufacturer> getAll() {
-       return manufacturerDao.getAll();
+        return manufacturerDao.getAll();
     }
 
     @Override

@@ -2,7 +2,6 @@ package mate.hwdao.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import mate.hwdao.db.Storage;
 
 public class Car {
     private Long id;
@@ -46,16 +45,16 @@ public class Car {
     }
 
     private long setId() {
-return -1;
+        return -1;
     }
 
     @Override
     public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", model='" + model + '\'' +
-                ", manufacturer=" + manufacturer +
-                ", drivers=" + drivers.toString() +
-                '}';
+        return "Car{"
+                + "id=" + id
+                + ", model='" + model + '\''
+                + ", manufacturer=" + manufacturer
+                + ", drivers=" + drivers.toString()
+                + '}';
     }
 }
