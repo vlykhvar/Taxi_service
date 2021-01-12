@@ -11,7 +11,7 @@ import mate.hwdao.model.Manufacturer;
 public class ManufactureDaoImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        Storage.listManufacturer.add(manufacturer);
+        Storage.addManufacturer(manufacturer);
         return manufacturer;
     }
 
