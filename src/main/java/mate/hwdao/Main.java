@@ -73,6 +73,5 @@ public class Main {
         carService.removeDriverFromCar(driverBogdan, carVida);
         System.out.println("His new list of work car is "
                 + carService.getAllByDriver(driverBogdan.getId()).toString());
-
     }
 }
