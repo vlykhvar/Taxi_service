@@ -31,12 +31,10 @@ public class ManufactureDaoImpl implements ManufacturerDao {
     public Manufacturer update(Manufacturer manufacturer) {
         for (int i = 0; i < Storage.manufacturers.size(); i++) {
             if (Storage.manufacturers.get(i).getId().equals(manufacturer.getId())) {
-                return Storage.manufacturers.set(i, manufacturer);
+                Storage.manufacturers.set(i, manufacturer);
             }
         }
-        throw new RuntimeException(manufacturer.getName()
-                + " is not added to our database. "
-                + "Contact us to +380000000 in case of the question");
+        return manufacturer;
     }
 
     @Override
