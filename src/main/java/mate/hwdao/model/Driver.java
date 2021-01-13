@@ -9,7 +9,6 @@ public class Driver {
     private String licenseNumber;
 
     public Driver (String name, String licenseNumber){
-        id = setId();
         this.name = name;
         this.licenseNumber = licenseNumber;
     }
@@ -36,8 +35,12 @@ public class Driver {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Driver driver = (Driver) o;
         return Objects.equals(id, driver.id)
                 && Objects.equals(name, driver.name)
@@ -51,18 +54,15 @@ public class Driver {
 
     @Override
     public String toString() {
-        return "Driver{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", licenseNumber='" + licenseNumber + '\'' +
-                '}';
+        return "Driver{"
+                + "id=" + id
+                + ", name='" + name
+                + '\''
+                + ", licenseNumber='" + licenseNumber
+                + '\'' +'}';
     }
 
-    private long setId() {
-        if(Storage.listDriver.size() == 0) {
-            return 1;
-        } else {
-            return Storage.listDriver.size() + 1;
-        }
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -11,7 +11,6 @@ public class Car {
     private List<Driver> drivers;
 
     public Car(String model, Manufacturer manufacturer) {
-        id = setId();
         this.model = model;
         this.manufacturer = manufacturer;
         drivers = new ArrayList<>();
@@ -45,17 +44,17 @@ public class Car {
         this.drivers = drivers;
     }
 
-    private long setId() {
-            return (long) Storage.listCar.size() + 1;
+    public void setId(Long id) {
+           this.id = id;
     }
 
     @Override
     public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", model='" + model + '\'' +
-                ", manufacturer=" + manufacturer +
-                ", drivers=" + drivers.toString() +
-                '}';
+        return "Car{"
+                + "id=" + id
+                + ", model='" + model + '\''
+                + ", manufacturer=" + manufacturer
+                //+ ", drivers=" + drivers.toString()
+                + '}';
     }
 }

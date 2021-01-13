@@ -2,7 +2,6 @@ package mate.hwdao.service;
 
 import java.util.List;
 import mate.hwdao.dao.ManufacturerDao;
-import mate.hwdao.db.Storage;
 import mate.hwdao.lib.Inject;
 import mate.hwdao.lib.Service;
 import mate.hwdao.model.Manufacturer;
@@ -21,7 +20,7 @@ public class ManufacturerServiceImpl implements ManufacturerService{
     @Override
     public Manufacturer get(Long id) {
        return manufacturerDao.get(id)
-               .orElseThrow(() -> new RuntimeException("Can't find " + id));
+               .orElseThrow(() -> new RuntimeException("Can't find manufacturer with id " + id));
     }
 
     @Override

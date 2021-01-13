@@ -4,12 +4,11 @@ import java.util.Objects;
 import mate.hwdao.db.Storage;
 
 public class Manufacturer {
-    private final Long id;
+    private Long id;
     private String name;
     private String country;
 
     public Manufacturer(String name, String country) {
-    id = setId();
     this.name = name;
     this.country = country;
     }
@@ -34,16 +33,22 @@ public class Manufacturer {
         this.country = country;
     }
 
-    private long setId() {
-            return Storage.listManufacturer.size() + 1;
+    public void setId(Long id) {
+            this.id = id;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Manufacturer that = (Manufacturer) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(country, that.country);
+        return Objects.equals(id, that.id)
+                && Objects.equals(name, that.name)
+                && Objects.equals(country, that.country);
     }
 
     @Override
@@ -53,10 +58,10 @@ public class Manufacturer {
 
     @Override
     public String toString() {
-        return "Manufacturer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", country='" + country + '\'' +
-                '}';
+        return "Manufacturer{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", country='" + country
+                + '\'' + '}';
     }
 }
