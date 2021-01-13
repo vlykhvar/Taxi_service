@@ -53,7 +53,7 @@ public class Car {
                 + "id=" + id
                 + ", model='" + model + '\''
                 + ", manufacturer=" + manufacturer
-                //+ ", drivers=" + drivers.toString()
+                + ", drivers=" + drivers.toString()
                 + '}';
     }
 }

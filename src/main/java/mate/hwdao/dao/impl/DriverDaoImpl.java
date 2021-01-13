@@ -34,7 +34,6 @@ public class DriverDaoImpl implements DriverDao {
     public Driver update(Driver driver) {
         for (int i = 0; i < Storage.drivers.size(); i++) {
             if (Storage.drivers.get(i).getId().equals(driver.getId())) {
-                Storage.drivers.remove(i);
                 Storage.drivers.set(i, driver);
             }
         }
