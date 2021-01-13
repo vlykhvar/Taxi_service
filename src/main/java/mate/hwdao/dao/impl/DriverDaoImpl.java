@@ -18,11 +18,10 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Optional<Driver> get(Long id) {
-        return Optional.of(Storage.drivers
+        return Storage.drivers
                 .stream()
                 .filter(x -> x.getId().equals(id))
-                .findFirst()
-                .get());
+                .findFirst();
     }
 
     @Override

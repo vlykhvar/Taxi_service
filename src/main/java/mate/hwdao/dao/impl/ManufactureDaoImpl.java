@@ -17,9 +17,9 @@ public class ManufactureDaoImpl implements ManufacturerDao {
 
     @Override
     public Optional<Manufacturer> get(Long id) {
-        return Optional.ofNullable(Storage.manufacturers.stream()
+        return Storage.manufacturers.stream()
                 .filter(x -> x.getId().equals(id))
-                .findFirst().get());
+                .findFirst();
     }
 
     @Override
