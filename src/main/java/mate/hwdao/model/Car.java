@@ -2,7 +2,6 @@ package mate.hwdao.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import mate.hwdao.db.Storage;
 
 public class Car {
     private Long id;
@@ -45,7 +44,7 @@ public class Car {
     }
 
     public void setId(Long id) {
-           this.id = id;
+        this.id = id;
     }
 
     @Override

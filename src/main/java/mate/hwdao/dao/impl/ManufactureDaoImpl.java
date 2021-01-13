@@ -43,6 +43,10 @@ public class ManufactureDaoImpl implements ManufacturerDao {
 
     @Override
     public boolean delete(Long id) {
-        return Storage.listManufacturer.remove(Storage.listManufacturer.stream().filter(x -> x.getId().equals(id)).findFirst().get());
+        return Storage.listManufacturer
+                .remove(Storage.listManufacturer.stream()
+                        .filter(x -> x.getId().equals(id))
+                        .findFirst()
+                        .get());
     }
 }

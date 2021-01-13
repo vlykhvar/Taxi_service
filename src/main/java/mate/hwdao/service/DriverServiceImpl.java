@@ -19,7 +19,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-       return driverDao.get(id)
+        return driverDao.get(id)
                .orElseThrow(() -> new RuntimeException("Can't find car with id " + id));
     }
 
@@ -30,7 +30,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver update(Driver driver) {
-       return driverDao.update(driver);
+        return driverDao.update(driver);
     }
 
     @Override

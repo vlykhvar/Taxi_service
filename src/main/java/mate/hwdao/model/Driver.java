@@ -7,7 +7,7 @@ public class Driver {
     private String name;
     private String licenseNumber;
 
-    public Driver (String name, String licenseNumber){
+    public Driver(String name, String licenseNumber) {
         this.name = name;
         this.licenseNumber = licenseNumber;
     }
@@ -58,7 +58,7 @@ public class Driver {
                 + ", name='" + name
                 + '\''
                 + ", licenseNumber='" + licenseNumber
-                + '\'' +'}';
+                + '\'' + '}';
     }
 
     public void  setId(Long id) {
