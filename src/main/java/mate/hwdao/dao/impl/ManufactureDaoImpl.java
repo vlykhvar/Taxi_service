@@ -31,9 +31,7 @@ public class ManufactureDaoImpl implements ManufacturerDao {
     public Manufacturer update(Manufacturer manufacturer) {
         for (int i = 0; i < Storage.manufacturers.size(); i++) {
             if (Storage.manufacturers.get(i).getId().equals(manufacturer.getId())) {
-                Storage.manufacturers.remove(i);
-                Storage.manufacturers.set(i, manufacturer);
-                return Storage.manufacturers.get(i);
+                return Storage.manufacturers.set(i, manufacturer);
             }
         }
         throw new RuntimeException(manufacturer.getName()
