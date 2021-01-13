@@ -2,6 +2,7 @@ package mate.hwdao.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import mate.hwdao.db.Storage;
 
 public class Car {
     private Long id;
@@ -10,7 +11,6 @@ public class Car {
     private List<Driver> drivers;
 
     public Car(String model, Manufacturer manufacturer) {
-        id = setId();
         this.model = model;
         this.manufacturer = manufacturer;
         drivers = new ArrayList<>();
@@ -44,8 +44,8 @@ public class Car {
         this.drivers = drivers;
     }
 
-    private long setId() {
-        return -1;
+    public void setId(Long id) {
+           this.id = id;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Car {
                 + "id=" + id
                 + ", model='" + model + '\''
                 + ", manufacturer=" + manufacturer
-                + ", drivers=" + drivers.toString()
+                //+ ", drivers=" + drivers.toString()
                 + '}';
     }
 }
