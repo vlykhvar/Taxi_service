@@ -8,7 +8,6 @@ public class Driver {
     private String licenseNumber;
 
     public Driver(String name, String licenseNumber) {
-        id = setId();
         this.name = name;
         this.licenseNumber = licenseNumber;
     }
@@ -56,12 +55,13 @@ public class Driver {
     public String toString() {
         return "Driver{"
                 + "id=" + id
-                + ", name='" + name + '\''
-                + ", licenseNumber='" + licenseNumber + '\''
-                + '}';
+                + ", name='" + name
+                + '\''
+                + ", licenseNumber='" + licenseNumber
+                + '\'' + '}';
     }
 
-    private long setId() {
-        return -1;
+    public void setId(Long id) {
+        this.id = id;
     }
 }
