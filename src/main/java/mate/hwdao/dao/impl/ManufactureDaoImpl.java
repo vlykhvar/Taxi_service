@@ -17,23 +17,23 @@ public class ManufactureDaoImpl implements ManufacturerDao {
 
     @Override
     public Optional<Manufacturer> get(Long id) {
-        return Optional.ofNullable(Storage.listManufacturer.stream()
+        return Optional.ofNullable(Storage.manufacturers.stream()
                 .filter(x -> x.getId().equals(id))
                 .findFirst().get());
     }
 
     @Override
     public List<Manufacturer> getAll() {
-        return Storage.listManufacturer;
+        return Storage.manufacturers;
     }
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        for (int i = 0; i < Storage.listManufacturer.size(); i++) {
-            if (Storage.listManufacturer.get(i).getId().equals(manufacturer.getId())) {
-                Storage.listManufacturer.remove(i);
-                Storage.listManufacturer.set(i, manufacturer);
-                return Storage.listManufacturer.get(i);
+        for (int i = 0; i < Storage.manufacturers.size(); i++) {
+            if (Storage.manufacturers.get(i).getId().equals(manufacturer.getId())) {
+                Storage.manufacturers.remove(i);
+                Storage.manufacturers.set(i, manufacturer);
+                return Storage.manufacturers.get(i);
             }
         }
         throw new RuntimeException(manufacturer.getName()
@@ -43,8 +43,8 @@ public class ManufactureDaoImpl implements ManufacturerDao {
 
     @Override
     public boolean delete(Long id) {
-        return Storage.listManufacturer
-                .remove(Storage.listManufacturer.stream()
+        return Storage.manufacturers
+                .remove(Storage.manufacturers.stream()
                         .filter(x -> x.getId().equals(id))
                         .findFirst()
                         .get());

@@ -18,7 +18,7 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public Optional<Driver> get(Long id) {
-        return Optional.of(Storage.listDriver
+        return Optional.of(Storage.drivers
                 .stream()
                 .filter(x -> x.getId().equals(id))
                 .findFirst()
@@ -27,15 +27,15 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public List<Driver> getAll() {
-        return Storage.listDriver;
+        return Storage.drivers;
     }
 
     @Override
     public Driver update(Driver driver) {
-        for (int i = 0; i < Storage.listDriver.size(); i++) {
-            if (Storage.listDriver.get(i).getId().equals(driver.getId())) {
-                Storage.listDriver.remove(i);
-                Storage.listDriver.set(i, driver);
+        for (int i = 0; i < Storage.drivers.size(); i++) {
+            if (Storage.drivers.get(i).getId().equals(driver.getId())) {
+                Storage.drivers.remove(i);
+                Storage.drivers.set(i, driver);
             }
         }
         return driver;
@@ -43,6 +43,6 @@ public class DriverDaoImpl implements DriverDao {
 
     @Override
     public boolean delete(Long id) {
-        return Storage.listDriver.removeIf(x -> x.getId().equals(id));
+        return Storage.drivers.removeIf(x -> x.getId().equals(id));
     }
 }

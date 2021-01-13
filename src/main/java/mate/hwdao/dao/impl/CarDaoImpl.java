@@ -18,7 +18,7 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public Optional<Car> get(Long id) {
-        return Optional.of(Storage.listCar
+        return Optional.of(Storage.cars
                 .stream()
                 .filter(x -> x.getId().equals(id))
                 .findFirst()
@@ -27,15 +27,15 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public List<Car> getAll() {
-        return Storage.listCar;
+        return Storage.cars;
     }
 
     @Override
     public Car update(Car car) {
-        for (int i = 0; i < Storage.listCar.size(); i++) {
-            if (Storage.listCar.get(i).getId().equals(car.getId())) {
-                Storage.listCar.remove(i);
-                Storage.listCar.set(i, car);
+        for (int i = 0; i < Storage.cars.size(); i++) {
+            if (Storage.cars.get(i).getId().equals(car.getId())) {
+                Storage.cars.remove(i);
+                Storage.cars.set(i, car);
             }
         }
         return car;
@@ -43,6 +43,6 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public boolean delete(Long id) {
-        return Storage.listCar.removeIf(x -> x.getId().equals(id));
+        return Storage.cars.removeIf(x -> x.getId().equals(id));
     }
 }
