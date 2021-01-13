@@ -10,6 +10,7 @@ public class Car {
     private List<Driver> drivers;
 
     public Car(String model, Manufacturer manufacturer) {
+        id = setId();
         this.model = model;
         this.manufacturer = manufacturer;
         drivers = new ArrayList<>();
@@ -43,8 +44,8 @@ public class Car {
         this.drivers = drivers;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    private long setId() {
+        return -1;
     }
 
     @Override

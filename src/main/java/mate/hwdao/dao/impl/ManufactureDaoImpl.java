@@ -17,28 +17,33 @@ public class ManufactureDaoImpl implements ManufacturerDao {
 
     @Override
     public Optional<Manufacturer> get(Long id) {
-        return Storage.manufacturers.stream()
-                .filter(x -> x.getId().equals(id))
-                .findFirst();
+        return Optional.ofNullable(
+                Storage.listManufacturer.stream()
+                        .filter(x -> x.getId().equals(id))
+                        .findFirst()
+                        .get());
     }
 
     @Override
     public List<Manufacturer> getAll() {
-        return Storage.manufacturers;
+        return Storage.listManufacturer;
     }
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        for (int i = 0; i < Storage.manufacturers.size(); i++) {
-            if (Storage.manufacturers.get(i).getId().equals(manufacturer.getId())) {
-                Storage.manufacturers.set(i, manufacturer);
+        for (int i = 0; i < Storage.listManufacturer.size(); i++) {
+            if (Storage.listManufacturer.get(i).getId().equals(manufacturer.getId())) {
+                Storage.listManufacturer.set(i, manufacturer);
+                return Storage.listManufacturer.get(i);
             }
         }
-        return manufacturer;
+        throw new RuntimeException(manufacturer.getName()
+                + " is not added to our database. "
+                + "Contact us to +380000000 in case of the question");
     }
 
     @Override
     public boolean delete(Long id) {
-        return Storage.manufacturers.removeIf(x -> x.getId().equals(id));
+        return Storage.listManufacturer.removeIf(x -> x.getId().equals(id));
     }
 }

@@ -32,7 +32,7 @@ public class Manufacturer {
         this.country = country;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -60,7 +60,7 @@ public class Manufacturer {
         return "Manufacturer{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", country='" + country
-                + '\'' + '}';
+                + ", country='" + country + '\''
+                + '}';
     }
 }
