@@ -46,4 +46,3 @@ public class CarDaoImpl implements CarDao {
         return Storage.listCar.removeIf(x -> x.getId().equals(id));
     }
 }
-  

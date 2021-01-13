@@ -1,14 +1,13 @@
 package mate.hwdao.model;
 
 import java.util.Objects;
-import mate.hwdao.db.Storage;
 
 public class Driver {
     private Long id;
     private String name;
     private String licenseNumber;
 
-    public Driver (String name, String licenseNumber){
+    public Driver(String name, String licenseNumber) {
         this.name = name;
         this.licenseNumber = licenseNumber;
     }
@@ -59,7 +58,7 @@ public class Driver {
                 + ", name='" + name
                 + '\''
                 + ", licenseNumber='" + licenseNumber
-                + '\'' +'}';
+                + '\'' + '}';
     }
 
     public void setId(long id) {

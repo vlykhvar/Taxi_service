@@ -39,7 +39,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public boolean delete(Long id) {
-       return carDao.delete(id);
+        return carDao.delete(id);
     }
 
     @Override

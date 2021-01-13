@@ -1,7 +1,6 @@
 package mate.hwdao.model;
 
 import java.util.Objects;
-import mate.hwdao.db.Storage;
 
 public class Manufacturer {
     private Long id;
@@ -9,8 +8,8 @@ public class Manufacturer {
     private String country;
 
     public Manufacturer(String name, String country) {
-    this.name = name;
-    this.country = country;
+        this.name = name;
+        this.country = country;
     }
 
     public Long getId() {
@@ -34,7 +33,7 @@ public class Manufacturer {
     }
 
     public void setId(Long id) {
-            this.id = id;
+        this.id = id;
     }
 
     @Override
