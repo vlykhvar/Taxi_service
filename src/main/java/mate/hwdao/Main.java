@@ -37,7 +37,7 @@ public class Main {
         manufacturerService.delete(1L);
         System.out.println("How to work service.delete: " + manufacturerService.getAll().toString());
         ConnectionUtil.dropTable();
-       /* Driver driverSofia = new Driver("Sofia", "0001");
+        /*Driver driverSofia = new Driver("Sofia", "0001");
         Driver driverBogdan = new Driver("Bogdan", "0002");
         Driver driverRoman = new Driver("Roman", "0003");
         Driver driverKsenia = new Driver("Ksenia", "0004");
