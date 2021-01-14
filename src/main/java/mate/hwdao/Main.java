@@ -33,7 +33,7 @@ public class Main {
         manufacturerHonda.setCountry("Japan");
         System.out.println("How to work service.update: "
                 + (manufacturerService.update(manufacturerHonda)).toString());
-        manufacturerService.delete(1L);
+        manufacturerService.delete(manufacturerHonda.getId());
         System.out.println("How to work service.getAll after deleted: "
                 + manufacturerService.getAll().toString());
         ConnectionUtil.dropTable();
