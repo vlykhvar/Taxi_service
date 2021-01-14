@@ -1,7 +1,6 @@
 package mate.hwdao;
 
 import java.sql.SQLException;
-
 import mate.hwdao.lib.Injector;
 import mate.hwdao.model.Manufacturer;
 import mate.hwdao.service.ManufacturerService;
@@ -35,7 +34,8 @@ public class Main {
         System.out.println("How to work service.update: "
                 + (manufacturerService.update(manufacturerHonda)).toString());
         manufacturerService.delete(1L);
-        System.out.println("How to work service.delete: " + manufacturerService.getAll().toString());
+        System.out.println("How to work service.delete: "
+                + manufacturerService.getAll().toString());
         ConnectionUtil.dropTable();
         /*Driver driverSofia = new Driver("Sofia", "0001");
         Driver driverBogdan = new Driver("Bogdan", "0002");

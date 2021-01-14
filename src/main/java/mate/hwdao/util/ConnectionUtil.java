@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionUtil {
-    private final static String LOGIN = "root";
-    private final static String PASSWORD = "root";
-    private final static String URL = "jdbc:mysql://localhost:3306/dao"
+    private static final String LOGIN = "root";
+    private static final String PASSWORD = "root";
+    private static final String URL = "jdbc:mysql://localhost:3306/dao"
             + "?useUnicode=true&useJDBCCompliantTimezoneShift="
             + "true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -34,20 +35,22 @@ public class ConnectionUtil {
         return null;
     }
 
-    public static void setBase(){
+    public static void setBase() {
         String query = FileReader.readFile("src/main/resources/init_db.sql");
         try {
-            PreparedStatement preparedStatement = ConnectionUtil.getConnection().prepareStatement(query);
+            PreparedStatement preparedStatement
+                    = ConnectionUtil.getConnection().prepareStatement(query);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
-    public static void dropTable(){
+    public static void dropTable() {
         String query = "drop table if exists manufacture";
         try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+            PreparedStatement preparedStatement
+                    = getConnection().prepareStatement(query);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

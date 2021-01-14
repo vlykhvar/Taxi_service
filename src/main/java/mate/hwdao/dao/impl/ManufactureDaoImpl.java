@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import mate.hwdao.dao.ManufacturerDao;
 import mate.hwdao.db.Storage;
-import mate.hwdao.lib.Dao;
 import mate.hwdao.model.Manufacturer;
 
 public class ManufactureDaoImpl implements ManufacturerDao {

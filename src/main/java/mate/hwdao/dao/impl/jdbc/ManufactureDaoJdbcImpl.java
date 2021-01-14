@@ -1,15 +1,15 @@
 package mate.hwdao.dao.impl.jdbc;
 
-import mate.hwdao.dao.ManufacturerDao;
-import mate.hwdao.lib.Dao;
-import mate.hwdao.model.Manufacturer;
-import mate.hwdao.util.ConnectionUtil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import mate.hwdao.dao.ManufacturerDao;
+import mate.hwdao.lib.Dao;
+import mate.hwdao.model.Manufacturer;
+import mate.hwdao.util.ConnectionUtil;
 
 @Dao
 public class ManufactureDaoJdbcImpl implements ManufacturerDao {
@@ -17,7 +17,8 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     public Manufacturer create(Manufacturer manufacturer) {
         try {
             String query = "INSERT INTO manufacture (name, country, isexist) VALUES (?, ?, ?)";
-            PreparedStatement preparedStatement = ConnectionUtil.getConnection().prepareStatement(query);
+            PreparedStatement preparedStatement
+                    = ConnectionUtil.getConnection().prepareStatement(query);
             preparedStatement.setString(1, manufacturer.getName());
             preparedStatement.setString(2, manufacturer.getCountry());
             preparedStatement.setBoolean(3, true);
@@ -45,7 +46,8 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
         Manufacturer manufacturer = null;
         String query = "SELECT * FROM manufacture WHERE id = ?";
         try {
-            PreparedStatement preparedStatement = ConnectionUtil.getConnection().prepareStatement(query);
+            PreparedStatement preparedStatement
+                    = ConnectionUtil.getConnection().prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -71,7 +73,8 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
         List<Manufacturer> manufacturers = new ArrayList<>();
         String query = "SELECT * FROM manufacture";
         try {
-            PreparedStatement preparedStatement = ConnectionUtil.getConnection().prepareStatement(query);
+            PreparedStatement preparedStatement
+                    = ConnectionUtil.getConnection().prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 if (resultSet.getBoolean(4)) {
@@ -94,7 +97,8 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     public Manufacturer update(Manufacturer manufacturer) {
         String query = "UPDATE manufacture SET name = ?, country = ? WHERE id = ?";
         try {
-            PreparedStatement preparedStatement = ConnectionUtil.getConnection().prepareStatement(query);
+            PreparedStatement preparedStatement
+                    = ConnectionUtil.getConnection().prepareStatement(query);
             preparedStatement.setString(1, manufacturer.getName());
             preparedStatement.setString(2, manufacturer.getCountry());
             preparedStatement.setLong(3, manufacturer.getId());
@@ -103,7 +107,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
                 return manufacturer;
             }
             preparedStatement.close();
-        }   catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println("Connection failed..." + ex);
         }
         throw new RuntimeException("Can't find manufacturer with id " + manufacturer.getId());
@@ -112,9 +116,10 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public boolean delete(Long id) {
         String query = "UPDATE manufacture SET isexist = false WHERE id = ?";
-        try (PreparedStatement preparedStatement = ConnectionUtil.getConnection().prepareStatement(query)) {
+        try (PreparedStatement preparedStatement
+                     = ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setLong(1, id);
-            if(preparedStatement.executeUpdate() > 0) {
+            if (preparedStatement.executeUpdate() > 0) {
                 preparedStatement.close();
                 return true;
             }
