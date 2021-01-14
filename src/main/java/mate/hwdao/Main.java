@@ -10,7 +10,7 @@ public class Main {
     private static final Injector injector = Injector.getInstance(Main.class.getPackageName());
 
     public static void main(String[] args) {
-        ConnectionUtil.setBase();
+        ConnectionUtil.setTable();
         System.out.println("All the characters and events depicted are fictitious. "
                 + "Any resemblance to a person living or dead is purely coincidental");
         ManufacturerService manufacturerService =
@@ -36,6 +36,5 @@ public class Main {
         System.out.println("How to work service.getAll after deleted: "
                 + manufacturerService.getAll().toString());
         ConnectionUtil.dropTable();
-       
     }
 }
