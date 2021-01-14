@@ -34,7 +34,7 @@ public class Main {
         System.out.println("How to work service.update: "
                 + (manufacturerService.update(manufacturerHonda)).toString());
         manufacturerService.delete(1L);
-        System.out.println("How to work service.delete: "
+        System.out.println("How to work service.getAll after deleted: "
                 + manufacturerService.getAll().toString());
         ConnectionUtil.dropTable();
         /*Driver driverSofia = new Driver("Sofia", "0001");
