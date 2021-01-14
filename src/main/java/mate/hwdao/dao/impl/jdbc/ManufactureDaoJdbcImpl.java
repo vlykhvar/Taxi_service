@@ -16,13 +16,13 @@ import mate.hwdao.util.ConnectionUtil;
 public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        String query = "INSERT INTO manufacture (name, country, isexist) VALUES (?, ?, ?)";
+        String query = "INSERT INTO manufacture (name, country) VALUES (?, ?)";
         try (PreparedStatement preparedStatement
                     = ConnectionUtil.getConnection()
                 .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, manufacturer.getName());
             preparedStatement.setString(2, manufacturer.getCountry());
-            preparedStatement.setBoolean(3, true);
+           // preparedStatement.setBoolean(3, true);
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             while (resultSet.next()) {
