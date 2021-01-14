@@ -52,9 +52,9 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 manufacturer = new Manufacturer();
-                manufacturer.setId(resultSet.getLong(1));
-                manufacturer.setName(resultSet.getString(2));
-                manufacturer.setCountry(resultSet.getString(3));
+                manufacturer.setId(resultSet.getObject(1, Long.class));
+                manufacturer.setName(resultSet.getObject(2, String.class));
+                manufacturer.setCountry(resultSet.getObject(3, String.class));
             }
             resultSet.close();
             preparedStatement.close();
@@ -76,9 +76,9 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 manufacturer = new Manufacturer();
-                manufacturer.setId(resultSet.getLong(1));
-                manufacturer.setName(resultSet.getString(2));
-                manufacturer.setCountry(resultSet.getString(3));
+                manufacturer.setId(resultSet.getObject(1, Long.class));
+                manufacturer.setName(resultSet.getObject(2, String.class));
+                manufacturer.setCountry(resultSet.getObject(3, String.class));
                 manufacturers.add(manufacturer);
             }
             resultSet.close();
