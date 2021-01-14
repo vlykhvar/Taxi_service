@@ -1,18 +1,18 @@
 package mate.hwdao;
 
+import java.sql.SQLException;
+
 import mate.hwdao.lib.Injector;
-import mate.hwdao.model.Car;
-import mate.hwdao.model.Driver;
 import mate.hwdao.model.Manufacturer;
-import mate.hwdao.service.CarService;
-import mate.hwdao.service.DriverService;
 import mate.hwdao.service.ManufacturerService;
+import mate.hwdao.util.ConnectionUtil;
 
 public class Main {
 
     private static final Injector injector = Injector.getInstance(Main.class.getPackageName());
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, InterruptedException {
+        ConnectionUtil.setBase();
         System.out.println("All the characters and events depicted are fictitious. "
                 + "Any resemblance to a person living or dead is purely coincidental");
         ManufacturerService manufacturerService =
@@ -32,9 +32,12 @@ public class Main {
         System.out.println("How to work manufacturer service.getId: "
                 + manufacturerService.get(manufacturerHonda.getId()).toString());
         manufacturerHonda.setCountry("Japan");
-        System.out.println("How to work update: "
+        System.out.println("How to work service.update: "
                 + (manufacturerService.update(manufacturerHonda)).toString());
-        Driver driverSofia = new Driver("Sofia", "0001");
+        manufacturerService.delete(1L);
+        System.out.println("How to work service.delete: " + manufacturerService.getAll().toString());
+        ConnectionUtil.dropTable();
+       /* Driver driverSofia = new Driver("Sofia", "0001");
         Driver driverBogdan = new Driver("Bogdan", "0002");
         Driver driverRoman = new Driver("Roman", "0003");
         Driver driverKsenia = new Driver("Ksenia", "0004");
@@ -72,6 +75,6 @@ public class Main {
                 + carVida.toString());
         carService.removeDriverFromCar(driverBogdan, carVida);
         System.out.println("His new list of work car is "
-                + carService.getAllByDriver(driverBogdan.getId()).toString());
+                + carService.getAllByDriver(driverBogdan.getId()).toString());*/
     }
 }
