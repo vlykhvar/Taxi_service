@@ -38,9 +38,9 @@ public class ConnectionUtil {
     public static void setTable() {
         dropTable();
         String query = FileReader.readFile("src/main/resources/init_db.sql");
-        try {
-            PreparedStatement preparedStatement
-                    = ConnectionUtil.getConnection().prepareStatement(query);
+        try (PreparedStatement preparedStatement
+                    = ConnectionUtil.getConnection()
+                .prepareStatement(query)) {
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
