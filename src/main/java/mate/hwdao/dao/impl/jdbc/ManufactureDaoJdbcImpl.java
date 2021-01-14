@@ -3,6 +3,7 @@ package mate.hwdao.dao.impl.jdbc;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,22 +19,17 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
         try {
             String query = "INSERT INTO manufacture (name, country, isexist) VALUES (?, ?, ?)";
             PreparedStatement preparedStatement
-                    = ConnectionUtil.getConnection().prepareStatement(query);
+                    = ConnectionUtil.getConnection()
+                    .prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, manufacturer.getName());
             preparedStatement.setString(2, manufacturer.getCountry());
             preparedStatement.setBoolean(3, true);
-            if (preparedStatement.executeUpdate() > 0) {
-                preparedStatement.close();
-                query = "SELECT id FROM manufacture WHERE name LIKE ? AND country LIKE ?";
-                preparedStatement = ConnectionUtil.getConnection().prepareStatement(query);
-                preparedStatement.setString(1, manufacturer.getName());
-                preparedStatement.setString(2, manufacturer.getCountry());
-                ResultSet resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    manufacturer.setId(resultSet.getObject("id", Long.class));
-                }
-                resultSet.close();
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            while (resultSet.next()) {
+                manufacturer.setId(resultSet.getObject(1, Long.class));
             }
+            resultSet.close();
             preparedStatement.close();
         } catch (SQLException ex) {
             System.out.println("Connection failed..." + ex);
