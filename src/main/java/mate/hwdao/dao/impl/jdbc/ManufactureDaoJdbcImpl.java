@@ -75,11 +75,11 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
                     = ConnectionUtil.getConnection().prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                    manufacturer = new Manufacturer();
-                    manufacturer.setId(resultSet.getLong(1));
-                    manufacturer.setName(resultSet.getString(2));
-                    manufacturer.setCountry(resultSet.getString(3));
-                    manufacturers.add(manufacturer);
+                manufacturer = new Manufacturer();
+                manufacturer.setId(resultSet.getLong(1));
+                manufacturer.setName(resultSet.getString(2));
+                manufacturer.setCountry(resultSet.getString(3));
+                manufacturers.add(manufacturer);
             }
             resultSet.close();
             preparedStatement.close();
@@ -91,7 +91,8 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        String query = "UPDATE manufacture SET name = ?, country = ? WHERE id = ? AND isexist = true";
+        String query = "UPDATE manufacture SET name = ?, country = ?"
+                + " WHERE id = ? AND isexist = true";
         try {
             PreparedStatement preparedStatement
                     = ConnectionUtil.getConnection().prepareStatement(query);
