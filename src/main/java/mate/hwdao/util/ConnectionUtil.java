@@ -35,7 +35,8 @@ public class ConnectionUtil {
         return null;
     }
 
-    public static void setBase() {
+    public static void setTable() {
+        dropTable();
         String query = FileReader.readFile("src/main/resources/init_db.sql");
         try {
             PreparedStatement preparedStatement
