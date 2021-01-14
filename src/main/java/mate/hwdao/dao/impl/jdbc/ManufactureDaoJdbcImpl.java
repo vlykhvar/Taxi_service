@@ -16,11 +16,10 @@ import mate.hwdao.util.ConnectionUtil;
 public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        try {
-            String query = "INSERT INTO manufacture (name, country, isexist) VALUES (?, ?, ?)";
-            PreparedStatement preparedStatement
+        String query = "INSERT INTO manufacture (name, country, isexist) VALUES (?, ?, ?)";
+        try (PreparedStatement preparedStatement
                     = ConnectionUtil.getConnection()
-                    .prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, manufacturer.getName());
             preparedStatement.setString(2, manufacturer.getCountry());
             preparedStatement.setBoolean(3, true);
@@ -29,10 +28,8 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
             while (resultSet.next()) {
                 manufacturer.setId(resultSet.getObject(1, Long.class));
             }
-            resultSet.close();
-            preparedStatement.close();
         } catch (SQLException ex) {
-            System.out.println("Connection failed..." + ex);
+            throw new RuntimeException("Saving manufacturer " + manufacturer + " failed", ex);
         }
         return manufacturer;
     }
@@ -41,24 +38,17 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     public Optional<Manufacturer> get(Long id) {
         Manufacturer manufacturer = null;
         String query = "SELECT * FROM manufacture WHERE id = ? AND isexist = true";
-        try {
-            PreparedStatement preparedStatement
-                    = ConnectionUtil.getConnection().prepareStatement(query);
+        try (PreparedStatement preparedStatement
+                     = ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                manufacturer = new Manufacturer();
-                manufacturer.setId(resultSet.getObject(1, Long.class));
-                manufacturer.setName(resultSet.getObject(2, String.class));
-                manufacturer.setCountry(resultSet.getObject(3, String.class));
+                manufacturer = getManufacturer(resultSet);
             }
-            resultSet.close();
-            preparedStatement.close();
-            return Optional.ofNullable(manufacturer);
         } catch (SQLException ex) {
             System.out.println("Connection failed..." + ex);
         }
-        return Optional.empty();
+        return Optional.ofNullable(manufacturer);
     }
 
     @Override
@@ -66,19 +56,12 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
         Manufacturer manufacturer = null;
         List<Manufacturer> manufacturers = new ArrayList<>();
         String query = "SELECT * FROM manufacture WHERE isexist = true";
-        try {
-            PreparedStatement preparedStatement
-                    = ConnectionUtil.getConnection().prepareStatement(query);
+        try (PreparedStatement preparedStatement
+                     = ConnectionUtil.getConnection().prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                manufacturer = new Manufacturer();
-                manufacturer.setId(resultSet.getObject(1, Long.class));
-                manufacturer.setName(resultSet.getObject(2, String.class));
-                manufacturer.setCountry(resultSet.getObject(3, String.class));
-                manufacturers.add(manufacturer);
+                manufacturers.add(getManufacturer(resultSet));
             }
-            resultSet.close();
-            preparedStatement.close();
         } catch (SQLException ex) {
             System.out.println("Connection failed..." + ex);
         }
@@ -89,17 +72,14 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     public Manufacturer update(Manufacturer manufacturer) {
         String query = "UPDATE manufacture SET name = ?, country = ?"
                 + " WHERE id = ? AND isexist = true";
-        try {
-            PreparedStatement preparedStatement
-                    = ConnectionUtil.getConnection().prepareStatement(query);
+        try (PreparedStatement preparedStatement
+                     = ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setString(1, manufacturer.getName());
             preparedStatement.setString(2, manufacturer.getCountry());
             preparedStatement.setLong(3, manufacturer.getId());
             if (preparedStatement.executeUpdate() > 0) {
-                preparedStatement.close();
                 return manufacturer;
             }
-            preparedStatement.close();
         } catch (SQLException ex) {
             System.out.println("Connection failed..." + ex);
         }
@@ -110,15 +90,23 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     public boolean delete(Long id) {
         String query = "UPDATE manufacture SET isexist = false WHERE id = ?";
         try (PreparedStatement preparedStatement
-                     = ConnectionUtil.getConnection().prepareStatement(query)) {
+                     = ConnectionUtil.getConnection()
+                .prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             if (preparedStatement.executeUpdate() > 0) {
-                preparedStatement.close();
                 return true;
             }
         } catch (SQLException ex) {
             System.out.println("Connection failed..." + ex);
         }
         return false;
+    }
+
+    private Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
+        Manufacturer manufacturer = new Manufacturer();
+        manufacturer.setId(resultSet.getObject(1, Long.class));
+        manufacturer.setName(resultSet.getObject(2, String.class));
+        manufacturer.setCountry(resultSet.getObject(3, String.class));
+        return manufacturer;
     }
 }
