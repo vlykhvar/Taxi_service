@@ -7,7 +7,6 @@ import mate.hwdao.db.Storage;
 import mate.hwdao.lib.Dao;
 import mate.hwdao.model.Manufacturer;
 
-@Dao
 public class ManufactureDaoImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
