@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import mate.hwdao.dao.ManufacturerDao;
+import mate.hwdao.dao.exception.DataProcessingException;
 import mate.hwdao.lib.Dao;
 import mate.hwdao.model.Manufacturer;
 import mate.hwdao.util.ConnectionUtil;
@@ -22,14 +23,13 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
                 .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, manufacturer.getName());
             preparedStatement.setString(2, manufacturer.getCountry());
-           // preparedStatement.setBoolean(3, true);
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             while (resultSet.next()) {
                 manufacturer.setId(resultSet.getObject(1, Long.class));
             }
         } catch (SQLException ex) {
-            throw new RuntimeException("Saving manufacturer " + manufacturer + " failed", ex);
+            throw new DataProcessingException("Saving manufacturer " + manufacturer + " failed", ex);
         }
         return manufacturer;
     }
@@ -37,7 +37,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Optional<Manufacturer> get(Long id) {
         Manufacturer manufacturer = null;
-        String query = "SELECT * FROM manufacture WHERE id = ? AND isexist = true";
+        String query = "SELECT * FROM manufacture WHERE id = ? AND is_exist = true";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setLong(1, id);
@@ -46,7 +46,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
                 manufacturer = getManufacturer(resultSet);
             }
         } catch (SQLException ex) {
-            System.out.println("Connection failed..." + ex);
+            throw new DataProcessingException("Can't get manufacture with " + id, ex);
         }
         return Optional.ofNullable(manufacturer);
     }
@@ -55,7 +55,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     public List<Manufacturer> getAll() {
         Manufacturer manufacturer = null;
         List<Manufacturer> manufacturers = new ArrayList<>();
-        String query = "SELECT * FROM manufacture WHERE isexist = true";
+        String query = "SELECT * FROM manufacture WHERE is_exist = true";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -63,7 +63,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
                 manufacturers.add(getManufacturer(resultSet));
             }
         } catch (SQLException ex) {
-            System.out.println("Connection failed..." + ex);
+            throw new DataProcessingException("Can't get list of manufacturers because of ", ex);
         }
         return manufacturers;
     }
@@ -71,7 +71,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
         String query = "UPDATE manufacture SET name = ?, country = ?"
-                + " WHERE id = ? AND isexist = true";
+                + " WHERE id = ? AND is_exist = true";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setString(1, manufacturer.getName());
@@ -81,14 +81,14 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
                 return manufacturer;
             }
         } catch (SQLException ex) {
-            System.out.println("Connection failed..." + ex);
+            throw new DataProcessingException(manufacturer.toString() + "was not updated, because of ", ex);
         }
         throw new RuntimeException("Can't find manufacturer with id " + manufacturer.getId());
     }
 
     @Override
     public boolean delete(Long id) {
-        String query = "UPDATE manufacture SET isexist = false WHERE id = ?";
+        String query = "UPDATE manufacture SET is_exist = false WHERE id = ?";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection()
                 .prepareStatement(query)) {
@@ -97,7 +97,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
                 return true;
             }
         } catch (SQLException ex) {
-            System.out.println("Connection failed..." + ex);
+            throw new DataProcessingException("manufacturer with " + id + "was not deleted because of", ex);
         }
         return false;
     }
