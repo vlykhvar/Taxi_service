@@ -29,7 +29,8 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
                 manufacturer.setId(resultSet.getObject(1, Long.class));
             }
         } catch (SQLException ex) {
-            throw new DataProcessingException("Saving manufacturer " + manufacturer + " failed", ex);
+            throw new DataProcessingException("Saving manufacturer " + manufacturer
+                    + " failed", ex);
         }
         return manufacturer;
     }
@@ -81,7 +82,8 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
                 return manufacturer;
             }
         } catch (SQLException ex) {
-            throw new DataProcessingException(manufacturer.toString() + "was not updated, because of ", ex);
+            throw new DataProcessingException(manufacturer.toString()
+                    + "was not updated, because of ", ex);
         }
         throw new RuntimeException("Can't find manufacturer with id " + manufacturer.getId());
     }
@@ -97,7 +99,8 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
                 return true;
             }
         } catch (SQLException ex) {
-            throw new DataProcessingException("manufacturer with " + id + "was not deleted because of", ex);
+            throw new DataProcessingException("manufacturer with " + id
+                    + "was not deleted because of", ex);
         }
         return false;
     }
