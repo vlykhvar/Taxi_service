@@ -44,19 +44,17 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Optional<Manufacturer> get(Long id) {
         Manufacturer manufacturer = null;
-        String query = "SELECT * FROM manufacture WHERE id = ?";
+        String query = "SELECT * FROM manufacture WHERE id = ? AND isexist = true";
         try {
             PreparedStatement preparedStatement
                     = ConnectionUtil.getConnection().prepareStatement(query);
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                if (resultSet.getBoolean(4)) {
-                    manufacturer = new Manufacturer();
-                    manufacturer.setId(resultSet.getLong(1));
-                    manufacturer.setName(resultSet.getString(2));
-                    manufacturer.setCountry(resultSet.getString(3));
-                }
+                manufacturer = new Manufacturer();
+                manufacturer.setId(resultSet.getLong(1));
+                manufacturer.setName(resultSet.getString(2));
+                manufacturer.setCountry(resultSet.getString(3));
             }
             resultSet.close();
             preparedStatement.close();
@@ -71,19 +69,17 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     public List<Manufacturer> getAll() {
         Manufacturer manufacturer = null;
         List<Manufacturer> manufacturers = new ArrayList<>();
-        String query = "SELECT * FROM manufacture";
+        String query = "SELECT * FROM manufacture WHERE isexist = true";
         try {
             PreparedStatement preparedStatement
                     = ConnectionUtil.getConnection().prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                if (resultSet.getBoolean(4)) {
                     manufacturer = new Manufacturer();
                     manufacturer.setId(resultSet.getLong(1));
                     manufacturer.setName(resultSet.getString(2));
                     manufacturer.setCountry(resultSet.getString(3));
                     manufacturers.add(manufacturer);
-                }
             }
             resultSet.close();
             preparedStatement.close();
@@ -95,7 +91,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        String query = "UPDATE manufacture SET name = ?, country = ? WHERE id = ?";
+        String query = "UPDATE manufacture SET name = ?, country = ? WHERE id = ? AND isexist = true";
         try {
             PreparedStatement preparedStatement
                     = ConnectionUtil.getConnection().prepareStatement(query);
