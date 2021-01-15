@@ -54,7 +54,6 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
 
     @Override
     public List<Manufacturer> getAll() {
-        Manufacturer manufacturer = null;
         List<Manufacturer> manufacturers = new ArrayList<>();
         String query = "SELECT * FROM manufacture WHERE does_exist = true";
         try (PreparedStatement preparedStatement
