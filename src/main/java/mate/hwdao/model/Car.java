@@ -15,6 +15,11 @@ public class Car {
         drivers = new ArrayList<>();
     }
 
+    public Car() {
+        drivers = new ArrayList<>();
+        Manufacturer manufacturer = new Manufacturer();
+    }
+
     public Long getId() {
         return id;
     }
