@@ -63,7 +63,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
                 manufacturers.add(getManufacturer(resultSet));
             }
         } catch (SQLException ex) {
-            throw new DataProcessingException("Can't get list of manufacturers because of ", ex);
+            throw new DataProcessingException("Can't get list of manufacturers", ex);
         }
         return manufacturers;
     }
