@@ -17,7 +17,6 @@ public class Car {
 
     public Car() {
         drivers = new ArrayList<>();
-        Manufacturer manufacturer = new Manufacturer();
     }
 
     public Long getId() {
