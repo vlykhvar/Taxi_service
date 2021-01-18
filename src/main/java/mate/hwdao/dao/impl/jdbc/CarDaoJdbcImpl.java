@@ -84,22 +84,13 @@ public class CarDaoJdbcImpl implements CarDao {
         String setNewDrivers = "INSERT INTO cars_drivers(driver_id, car_id) VALUES (?, ?)";
         try (PreparedStatement updateCarStatement
                      = ConnectionUtil.getConnection()
-                   .prepareStatement(updateCar);
-                 PreparedStatement deletedOldDriversStatement = ConnectionUtil.getConnection()
-                        .prepareStatement(deletedOldDrivers);
-                PreparedStatement setNewDriversStatement = ConnectionUtil.getConnection()
-                        .prepareStatement(setNewDrivers)) {
+                .prepareStatement(updateCar)) {
             updateCarStatement.setLong(1, car.getManufacturer().getId());
             updateCarStatement.setString(2, car.getModel());
             updateCarStatement.setLong(3, car.getId());
             updateCarStatement.executeUpdate();
-            deletedOldDriversStatement.setLong(1, car.getId());
-            deletedOldDriversStatement.executeUpdate();
-            for (Driver driver : car.getDrivers()) {
-                setNewDriversStatement.setLong(1, driver.getId());
-                setNewDriversStatement.setLong(2, car.getId());
-                setNewDriversStatement.executeUpdate();
-            }
+            delateOldDrivers(deletedOldDrivers, car);
+            setNewDriversStatement(setNewDrivers,car);
         } catch (SQLException ex) {
             throw new DataProcessingException("Can't save " + car
                     + " failed", ex);
@@ -140,6 +131,31 @@ public class CarDaoJdbcImpl implements CarDao {
         } catch (SQLException ex) {
             throw new DataProcessingException("Can't get list of car by driver id: "
                     + driverId, ex);
+        }
+    }
+
+    private void delateOldDrivers(String query, Car car) {
+        try (PreparedStatement deletedOldDriversStatement = ConnectionUtil.getConnection()
+                .prepareStatement(query)) {
+            deletedOldDriversStatement.setLong(1, car.getId());
+            deletedOldDriversStatement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new DataProcessingException("Can't save " + car
+                    + " failed", ex);
+        }
+    }
+
+    private void setNewDriversStatement(String query, Car car) {
+        try (PreparedStatement setNewDriversStatement = ConnectionUtil.getConnection()
+                .prepareStatement(query)) {
+            for (Driver driver : car.getDrivers()) {
+                setNewDriversStatement.setLong(1, driver.getId());
+                setNewDriversStatement.setLong(2, car.getId());
+                setNewDriversStatement.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            throw new DataProcessingException("Can't save " + car
+                    + " failed", ex);
         }
     }
 
