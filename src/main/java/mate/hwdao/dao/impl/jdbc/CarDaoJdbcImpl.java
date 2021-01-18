@@ -174,7 +174,8 @@ public class CarDaoJdbcImpl implements CarDao {
             }
             return drivers;
         } catch (SQLException ex) {
-            throw new DataProcessingException("Can not get list of drivers for car with id :" + car.getId(), ex);
+            throw new DataProcessingException("Can not get list of drivers for car with id :"
+                    + car.getId(), ex);
         }
     }
 }
