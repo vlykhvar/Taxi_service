@@ -2,7 +2,7 @@ CREATE TABLE `dao`.`manufactures` (
                                       `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
                                       `name` VARCHAR(255) NULL,
                                       `country` VARCHAR(100) NULL,
-                                      `does_exist` BIT NULL DEFAULT true,
+                                      `deleted` BIT NULL DEFAULT false,
                                       PRIMARY KEY (`id`));
 CREATE TABLE `dao`.`drivers` (
                                  `id` BIGINT(11) NOT NULL AUTO_INCREMENT,

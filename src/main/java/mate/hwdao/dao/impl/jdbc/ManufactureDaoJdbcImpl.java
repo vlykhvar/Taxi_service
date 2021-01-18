@@ -38,7 +38,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Optional<Manufacturer> get(Long id) {
         Manufacturer manufacturer = null;
-        String query = "SELECT * FROM manufactures WHERE id = ? AND does_exist = true";
+        String query = "SELECT * FROM manufactures WHERE id = ? AND deleted = false ";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setLong(1, id);
@@ -55,7 +55,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public List<Manufacturer> getAll() {
         List<Manufacturer> manufacturers = new ArrayList<>();
-        String query = "SELECT * FROM manufactures WHERE does_exist = true";
+        String query = "SELECT * FROM manufactures WHERE deleted = false";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -71,7 +71,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
         String query = "UPDATE manufactures SET name = ?, country = ?"
-                + " WHERE id = ? AND does_exist = true";
+                + " WHERE id = ? AND deleted = false";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setString(1, manufacturer.getName());
@@ -89,7 +89,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
 
     @Override
     public boolean delete(Long id) {
-        String query = "UPDATE manufactures SET does_exist = false WHERE id = ?";
+        String query = "UPDATE manufactures SET deleted = true WHERE id = ?";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection()
                 .prepareStatement(query)) {
