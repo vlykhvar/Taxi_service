@@ -74,11 +74,10 @@ public class Main {
         carService.create(carCivic);
         carService.create(carFocus);
         carService.create(carC5);
-        System.out.println(carService.get(5L));
-        System.out.println(carService.getAll().toString());
         carService.addDriverToCar(driverDmytro, carVida);
         carService.addDriverToCar(driverRoman, carVida);
         carService.removeDriverFromCar(driverSofia, carVida);
+        System.out.println(carService.getAll().toString());
         System.out.println(carService.get(carVida.getId()).toString());
         carService.addDriverToCar(driverSofia, carCivic);
         carService.addDriverToCar(driverBogdan, carCivic);

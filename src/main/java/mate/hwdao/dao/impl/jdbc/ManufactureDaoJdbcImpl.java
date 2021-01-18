@@ -26,7 +26,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             while (resultSet.next()) {
-                manufacturer.setId(resultSet.getObject(1, Long.class));
+                manufacturer.setId(resultSet.getObject("GENERATED_KEY", Long.class));
             }
         } catch (SQLException ex) {
             throw new DataProcessingException("Saving manufacturer " + manufacturer
