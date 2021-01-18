@@ -1,9 +1,7 @@
 package mate.hwdao.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import mate.hwdao.dao.CarDao;
-import mate.hwdao.db.Storage;
 import mate.hwdao.lib.Inject;
 import mate.hwdao.lib.Service;
 import mate.hwdao.model.Car;
@@ -56,14 +54,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> getAllByDriver(Long driverId) {
-        List<Car> newListCar = new ArrayList<>();
-        for (Car car : Storage.cars) {
-            for (Driver driver : car.getDrivers()) {
-                if (driver.getId().equals(driverId)) {
-                    newListCar.add(car);
-                }
-            }
-        }
-        return newListCar;
+        return carDao.getAllByDriver(driverId);
     }
 }
