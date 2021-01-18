@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
+import mate.hwdao.dao.exception.DataProcessingException;
 
 public class ConnectionUtil {
     private static final String LOGIN = "root";
@@ -28,11 +29,8 @@ public class ConnectionUtil {
         try {
             return DriverManager.getConnection(URL, dbProperties);
         } catch (SQLException ex) {
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
+            throw new DataProcessingException("SQLException: " + ex.getMessage(), ex);
         }
-        return null;
     }
 
     public static void setTable() {
@@ -42,8 +40,8 @@ public class ConnectionUtil {
                     = ConnectionUtil.getConnection()
                 .prepareStatement(query)) {
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException ex) {
+            throw new DataProcessingException("Can't set table ", ex);
         }
     }
 
@@ -54,7 +52,7 @@ public class ConnectionUtil {
                     = getConnection().prepareStatement(query);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new DataProcessingException("table was not deleted", throwables);
         }
     }
 }
