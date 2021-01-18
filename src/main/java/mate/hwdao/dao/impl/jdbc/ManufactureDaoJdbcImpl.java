@@ -17,7 +17,7 @@ import mate.hwdao.util.ConnectionUtil;
 public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        String query = "INSERT INTO manufacture (name, country) VALUES (?, ?)";
+        String query = "INSERT INTO manufactures (name, country) VALUES (?, ?)";
         try (PreparedStatement preparedStatement
                     = ConnectionUtil.getConnection()
                 .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -38,7 +38,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Optional<Manufacturer> get(Long id) {
         Manufacturer manufacturer = null;
-        String query = "SELECT * FROM manufacture WHERE id = ? AND does_exist = true";
+        String query = "SELECT * FROM manufactures WHERE id = ? AND does_exist = true";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setLong(1, id);
@@ -55,7 +55,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public List<Manufacturer> getAll() {
         List<Manufacturer> manufacturers = new ArrayList<>();
-        String query = "SELECT * FROM manufacture WHERE does_exist = true";
+        String query = "SELECT * FROM manufactures WHERE does_exist = true";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -70,7 +70,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        String query = "UPDATE manufacture SET name = ?, country = ?"
+        String query = "UPDATE manufactures SET name = ?, country = ?"
                 + " WHERE id = ? AND does_exist = true";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query)) {
@@ -89,7 +89,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
 
     @Override
     public boolean delete(Long id) {
-        String query = "UPDATE manufacture SET does_exist = false WHERE id = ?";
+        String query = "UPDATE manufactures SET does_exist = false WHERE id = ?";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection()
                 .prepareStatement(query)) {
