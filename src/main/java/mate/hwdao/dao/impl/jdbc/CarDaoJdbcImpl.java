@@ -119,8 +119,8 @@ public class CarDaoJdbcImpl implements CarDao {
     }
 
     public List<Car> getAllByDriver(Long driverId) {
-        String query = "SELECT cars.id, model, cars.deleted, "
-                + "manufactures.id, manufactures.name, manufactures.country "
+        String query = "SELECT cars.id, model, manufactures.id, "
+                + "manufactures.name, manufactures.country "
                 + "FROM cars JOIN manufactures ON cars.manufacturer_id = manufactures.id "
                 + "JOIN cars_drivers ON cars.id = cars_drivers.car_id "
                 + "JOIN drivers ON cars_drivers.driver_id = drivers.id "
