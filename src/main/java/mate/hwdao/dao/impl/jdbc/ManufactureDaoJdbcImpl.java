@@ -17,7 +17,7 @@ import mate.hwdao.util.ConnectionUtil;
 public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        String query = "INSERT INTO manufacture (name, country) VALUES (?, ?)";
+        String query = "INSERT INTO manufactures (name, country) VALUES (?, ?)";
         try (PreparedStatement preparedStatement
                     = ConnectionUtil.getConnection()
                 .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -26,7 +26,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             while (resultSet.next()) {
-                manufacturer.setId(resultSet.getObject(1, Long.class));
+                manufacturer.setId(resultSet.getObject("GENERATED_KEY", Long.class));
             }
         } catch (SQLException ex) {
             throw new DataProcessingException("Saving manufacturer " + manufacturer
@@ -38,7 +38,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Optional<Manufacturer> get(Long id) {
         Manufacturer manufacturer = null;
-        String query = "SELECT * FROM manufacture WHERE id = ? AND does_exist = true";
+        String query = "SELECT * FROM manufactures WHERE id = ? AND deleted = false ";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setLong(1, id);
@@ -54,9 +54,8 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
 
     @Override
     public List<Manufacturer> getAll() {
-        Manufacturer manufacturer = null;
         List<Manufacturer> manufacturers = new ArrayList<>();
-        String query = "SELECT * FROM manufacture WHERE does_exist = true";
+        String query = "SELECT * FROM manufactures WHERE deleted = false";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -64,15 +63,15 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
                 manufacturers.add(getManufacturer(resultSet));
             }
         } catch (SQLException ex) {
-            throw new DataProcessingException("Can't get list of manufacturers because of ", ex);
+            throw new DataProcessingException("Can't get list of manufacturers", ex);
         }
         return manufacturers;
     }
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        String query = "UPDATE manufacture SET name = ?, country = ?"
-                + " WHERE id = ? AND does_exist = true";
+        String query = "UPDATE manufactures SET name = ?, country = ?"
+                + " WHERE id = ? AND deleted = false";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection().prepareStatement(query)) {
             preparedStatement.setString(1, manufacturer.getName());
@@ -90,7 +89,7 @@ public class ManufactureDaoJdbcImpl implements ManufacturerDao {
 
     @Override
     public boolean delete(Long id) {
-        String query = "UPDATE manufacture SET does_exist = false WHERE id = ?";
+        String query = "UPDATE manufactures SET deleted = true WHERE id = ?";
         try (PreparedStatement preparedStatement
                      = ConnectionUtil.getConnection()
                 .prepareStatement(query)) {
