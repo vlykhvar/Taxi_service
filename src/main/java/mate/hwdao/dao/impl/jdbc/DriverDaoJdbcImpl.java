@@ -45,7 +45,7 @@ public class DriverDaoJdbcImpl implements DriverDao {
                              = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 driver = getDriver(resultSet);
             }
         } catch (SQLException ex) {
@@ -66,7 +66,7 @@ public class DriverDaoJdbcImpl implements DriverDao {
                 drivers.add(getDriver(resultSet));
             }
         } catch (SQLException ex) {
-            throw new DataProcessingException("Can't get list of manufacturers because of ", ex);
+            throw new DataProcessingException("Can't get list of drivers ", ex);
         }
         return drivers;
     }
@@ -88,7 +88,7 @@ public class DriverDaoJdbcImpl implements DriverDao {
             throw new DataProcessingException(driver.toString()
                     + "was not updated, because of ", ex);
         }
-        throw new RuntimeException("Can't find manufacturer with id " + driver.getId());
+        throw new RuntimeException("Can't find driver with id " + driver.getId());
     }
 
     @Override
@@ -101,15 +101,15 @@ public class DriverDaoJdbcImpl implements DriverDao {
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
             throw new DataProcessingException("drivers with " + id
-                    + "was not deleted because of", ex);
+                    + "was not deleted", ex);
         }
     }
 
     private Driver getDriver(ResultSet resultSet) throws SQLException {
         Driver driver = new Driver();
-        driver.setId(resultSet.getObject(1, Long.class));
-        driver.setName(resultSet.getObject(2, String.class));
-        driver.setLicenseNumber(resultSet.getObject(3, String.class));
+        driver.setId(resultSet.getObject("id", Long.class));
+        driver.setName(resultSet.getObject("name", String.class));
+        driver.setLicenseNumber(resultSet.getObject("license_number", String.class));
         return driver;
     }
 }
