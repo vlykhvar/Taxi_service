@@ -5,15 +5,6 @@
          version="3.1">
 
     <servlet>
-        <servlet-name> index </servlet-name>
-        <servlet-class>mate.hwdao.controllers.IndexController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>index</servlet-name>
-        <url-pattern>/index</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name> allDrivers</servlet-name>
         <servlet-class>mate.hwdao.controllers.DisplayAllDriversController</servlet-class>
     </servlet>
@@ -82,11 +73,11 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name> nullPage </servlet-name>
+        <servlet-name>index</servlet-name>
         <servlet-class>mate.hwdao.controllers.IndexController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>nullPage</servlet-name>
+        <servlet-name>index</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>
