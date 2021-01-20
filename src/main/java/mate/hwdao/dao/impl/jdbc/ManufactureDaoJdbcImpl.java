@@ -7,14 +7,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import mate.hwdao.dao.GenericDao;
+import mate.hwdao.dao.ManufacturerDao;
 import mate.hwdao.dao.exception.DataProcessingException;
 import mate.hwdao.lib.Dao;
 import mate.hwdao.model.Manufacturer;
 import mate.hwdao.util.ConnectionUtil;
 
 @Dao
-public class ManufactureDaoJdbcImpl implements GenericDao<Manufacturer, Long> {
+public class ManufactureDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
         String query = "INSERT INTO manufactures (name, country) VALUES (?, ?)";

@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import mate.hwdao.dao.GenericDao;
+import mate.hwdao.dao.CarDao;
 import mate.hwdao.dao.exception.DataProcessingException;
 import mate.hwdao.lib.Dao;
 import mate.hwdao.model.Car;
@@ -17,7 +17,7 @@ import mate.hwdao.model.Manufacturer;
 import mate.hwdao.util.ConnectionUtil;
 
 @Dao
-public class CarDaoJdbcImpl implements GenericDao<Car, Long> {
+public class CarDaoJdbcImpl implements CarDao {
     @Override
     public Car create(Car car) {
         String query = "INSERT INTO cars (manufacturer_id, model) VALUES (?, ?)";
