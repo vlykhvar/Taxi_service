@@ -11,7 +11,7 @@
     <input type="text" name = model> <br>
 </label>
     Please, provide manufacture' id: <label>
-    <input type="text" name = manufacturerId> <br>
+    <input type="number" name = manufacturerId> <br>
 </label>
     <button type="submit">Add</button> <br>
 </form>
