@@ -10,6 +10,7 @@ import mate.hwdao.lib.Injector;
 import mate.hwdao.service.DriverService;
 
 public class DeleteDriverController extends HttpServlet {
+
     private static final Injector injector =
             Injector.getInstance(Main.class.getPackageName());
     private final DriverService driverService =

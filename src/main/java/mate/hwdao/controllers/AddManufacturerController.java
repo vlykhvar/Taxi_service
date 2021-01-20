@@ -11,6 +11,7 @@ import mate.hwdao.model.Manufacturer;
 import mate.hwdao.service.ManufacturerService;
 
 public class AddManufacturerController extends HttpServlet {
+
     private static final Injector injector =
             Injector.getInstance(Main.class.getPackageName());
     private final ManufacturerService manufacturerService =
@@ -25,12 +26,9 @@ public class AddManufacturerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Manufacturer manufacturer = new Manufacturer();
         String name = request.getParameter("name");
         String country = request.getParameter("country");
-        manufacturer.setCountry(country);
-        manufacturer.setName(name);
-        manufacturerService.create(manufacturer);
-        System.out.println(manufacturerService.get(manufacturer.getId()));
+        manufacturerService.create(new Manufacturer(name, country));
+        response.sendRedirect(request.getContextPath() + "/manufacturer/");
     }
 }

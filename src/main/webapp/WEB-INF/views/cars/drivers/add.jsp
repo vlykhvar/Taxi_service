@@ -6,7 +6,7 @@
 <body>
 
 <div style="text-align: center;"><h1>Add Driver to Car</h1>
-<form method="post" action="${pageContext.request.contextPath}/cars/addDriverToCar">
+<form method="post" action="${pageContext.request.contextPath}/drivers/add">
     Please, provide driver's id: <label>
     <input type="text" name = driverId> <br>
 </label>

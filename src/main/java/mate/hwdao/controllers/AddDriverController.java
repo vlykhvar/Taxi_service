@@ -11,6 +11,7 @@ import mate.hwdao.model.Driver;
 import mate.hwdao.service.DriverService;
 
 public class AddDriverController extends HttpServlet {
+
     private static final Injector injector =
             Injector.getInstance(Main.class.getPackageName());
     private final DriverService driverService =
@@ -25,13 +26,9 @@ public class AddDriverController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Driver driver = new Driver();
         String name = request.getParameter("name");
         String licenseNumber = request.getParameter("licenceNumber");
-        driver.setLicenseNumber(licenseNumber);
-        driver.setName(name);
-        driverService.create(driver);
-        System.out.println(driverService.get(driver.getId()));
+        driverService.create(new Driver(name, licenseNumber));
+        response.sendRedirect(request.getContextPath() + "/drivers/");
     }
-
 }
