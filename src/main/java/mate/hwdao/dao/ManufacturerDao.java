@@ -1,17 +1,7 @@
 package mate.hwdao.dao;
 
-import java.util.List;
-import java.util.Optional;
 import mate.hwdao.model.Manufacturer;
 
-public interface ManufacturerDao {
-    Manufacturer create(Manufacturer manufacturer);
+public interface ManufacturerDao extends GenericDao<Manufacturer, Long> {
 
-    Optional<Manufacturer> get(Long id);
-
-    List<Manufacturer> getAll();
-
-    Manufacturer update(Manufacturer manufacturer);
-
-    boolean delete(Long id);
 }
