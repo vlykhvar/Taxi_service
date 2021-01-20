@@ -8,14 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import mate.hwdao.dao.DriverDao;
+import mate.hwdao.dao.GenericDao;
 import mate.hwdao.dao.exception.DataProcessingException;
 import mate.hwdao.lib.Dao;
 import mate.hwdao.model.Driver;
 import mate.hwdao.util.ConnectionUtil;
 
 @Dao
-public class DriverDaoJdbcImpl implements DriverDao {
+public class DriverDaoJdbcImpl implements GenericDao<Driver, Long> {
     @Override
     public Driver create(Driver driver) {
         String query = "INSERT INTO drivers (name, license_number) VALUES (?, ?)";
