@@ -11,7 +11,6 @@ import mate.hwdao.model.Manufacturer;
 import mate.hwdao.service.ManufacturerService;
 
 public class AddManufacturerController extends HttpServlet {
-
     private static final Injector injector =
             Injector.getInstance(Main.class.getPackageName());
     private final ManufacturerService manufacturerService =

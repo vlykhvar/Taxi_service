@@ -13,7 +13,6 @@ import mate.hwdao.service.CarService;
 import mate.hwdao.service.DriverService;
 
 public class AddDriverToCarController extends HttpServlet {
-
     private static final Injector injector =
             Injector.getInstance(Main.class.getPackageName());
     private final CarService carService =
