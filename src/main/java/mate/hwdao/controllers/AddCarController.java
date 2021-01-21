@@ -33,8 +33,8 @@ public class AddCarController extends HttpServlet {
         String model = req.getParameter("model");
         String manufacturerId = req.getParameter("manufacturerId");
         Manufacturer manufacturer = manufacturerService.get(Long.valueOf(manufacturerId));
-            carService.create(new Car(model, manufacturer));
-            req.setAttribute("message", "Car was added");
-            req.getRequestDispatcher("/WEB-INF/views/cars/add.jsp").forward(req, resp);
+        carService.create(new Car(model, manufacturer));
+        req.setAttribute("message", "Car was added");
+        req.getRequestDispatcher("/WEB-INF/views/cars/add.jsp").forward(req, resp);
     }
 }

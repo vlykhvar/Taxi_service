@@ -30,6 +30,7 @@ public class AddManufacturerController extends HttpServlet {
         String country = request.getParameter("country");
         manufacturerService.create(new Manufacturer(name, country));
         request.setAttribute("message", "Manufacture was added");
-        request.getRequestDispatcher("/WEB-INF/views/manufacturer/add.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/manufacturer/add.jsp")
+                .forward(request, response);
     }
 }
