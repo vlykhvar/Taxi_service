@@ -24,15 +24,17 @@
 
 <div style="text-align: center;"><h1>Add Cars</h1>
     <h4>${message}</h4>
-<form method="post" action="${pageContext.request.contextPath}/cars/add">
-    Please, provide car's model: <label>
-    <input type="text" name = model> <br>
-</label>
-    Please, provide manufacture' id: <label>
-    <input type="number" name = manufacturerId> <br>
-</label>
-    <button type="submit">Add</button> <br>
-</form>
+    <form method="post" action="${pageContext.request.contextPath}/cars/add">
+        Please, provide car's model:
+        <label>
+            <input type="text" name = model> <br>
+        </label>
+        Please, provide manufacture' id:
+        <label>
+            <input type="number" name = manufacturerId> <br>
+        </label>
+        <button type="submit">Add</button> <br>
+    </form>
 </div>
 </body>
 </html>

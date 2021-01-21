@@ -38,30 +38,30 @@
 <body>
 <div style="text-align: center;"><h1>All Drivers</h1>
     <h4>${message}</h4>
-<table border="1" style="align-content: center">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>License Number</th>
-        <th>Delete Button</th>
-    </tr>
-    <c:forEach var = "driver" items="${drivers}">
+    <table border="1" style="align-content: center">
         <tr>
-            <td>
-                <c:out value="${driver.id}" />
-            </td>
-            <td>
-                <c:out value="${driver.name}"/>
-            </td>
-            <td>
-                <c:out value="${driver.licenseNumber}"/>
-            </td>
-            <td>
-            <a href ="${pageContext.request.contextPath}/drivers/delete?id=${driver.id}">Delete</a>
-            </td>
+            <th>ID</th>
+            <th>Name</th>
+            <th>License Number</th>
+            <th>Delete Button</th>
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach var = "driver" items="${drivers}">
+            <tr>
+                <td>
+                    <c:out value="${driver.id}" />
+                </td>
+                <td>
+                    <c:out value="${driver.name}"/>
+                </td>
+                <td>
+                    <c:out value="${driver.licenseNumber}"/>
+                </td>
+                <td>
+                    <a href ="${pageContext.request.contextPath}/drivers/delete?id=${driver.id}">Delete</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 </body>
 </html>
