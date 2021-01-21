@@ -5,11 +5,78 @@
          version="3.1">
 
     <servlet>
-        <servlet-name> index </servlet-name>
+        <servlet-name> allDrivers</servlet-name>
+        <servlet-class>mate.hwdao.controllers.DisplayAllDriversController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name> allDrivers</servlet-name>
+        <url-pattern>/drivers/</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name> addDriver </servlet-name>
+        <servlet-class>mate.hwdao.controllers.AddDriverController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addDriver</servlet-name>
+        <url-pattern>/drivers/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name> addManufacturer </servlet-name>
+        <servlet-class>mate.hwdao.controllers.AddManufacturerController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addManufacturer</servlet-name>
+        <url-pattern>/manufacturers/add</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name> addCars </servlet-name>
+        <servlet-class>mate.hwdao.controllers.AddCarController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addCars</servlet-name>
+        <url-pattern>/cars/add</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name> addDriverToCar </servlet-name>
+        <servlet-class>mate.hwdao.controllers.AddDriverToCarController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addDriverToCar</servlet-name>
+        <url-pattern>/cars/drivers/add</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name> deleteDriver </servlet-name>
+        <servlet-class>mate.hwdao.controllers.DeleteDriverController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteDriver</servlet-name>
+        <url-pattern>/drivers/delete</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name> allManufacture </servlet-name>
+        <servlet-class>mate.hwdao.controllers.DisplayAllManufacturesController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name> allManufacture</servlet-name>
+        <url-pattern>/manufacturers/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name> deleteManufacture </servlet-name>
+        <servlet-class>mate.hwdao.controllers.DeleteManufacturerController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteManufacture</servlet-name>
+        <url-pattern>/manufacturers/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>index</servlet-name>
         <servlet-class>mate.hwdao.controllers.IndexController</servlet-class>
     </servlet>
-<servlet-mapping>
-    <servlet-name>index</servlet-name>
-    <url-pattern>/index</url-pattern>
-</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 </web-app>

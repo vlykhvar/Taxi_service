@@ -9,7 +9,6 @@ import mate.hwdao.service.DriverService;
 import mate.hwdao.service.ManufacturerService;
 
 public class Main {
-
     private static final Injector injector = Injector.getInstance(Main.class.getPackageName());
 
     public static void main(String[] args) {
