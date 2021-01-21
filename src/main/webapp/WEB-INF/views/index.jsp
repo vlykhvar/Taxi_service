@@ -3,6 +3,23 @@
 <head>
     <title>Title</title>
 </head>
+<style>
+    body {
+        background-color: rebeccapurple;
+    }
+    a:link {
+        color: black;
+    }
+    a:visited {
+        color: black;
+    }
+    a:hover {
+        color: black;
+    }
+    a:active {
+        color: black;
+    }
+</style>
 <body>
 <div style="text-align: center;"><h1>Hello Page!</h1>
 <a href = "${pageContext.request.contextPath}/manufacturer/add"> Add new manufacturer </a><br>

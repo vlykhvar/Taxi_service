@@ -4,6 +4,31 @@
 <head>
     <title>All Manufacture</title>
 </head>
+<style>
+    body {
+        background-color: rebeccapurple;
+    }
+    a:link {
+        color: black;
+    }
+    a:visited {
+        color: black;
+    }
+    a:hover {
+        color: black;
+    }
+    a:active {
+        color: black;
+    }
+    table {
+        width: 300px;
+        border: 2px solid darkgreen;
+        margin: auto;
+    }
+    td {
+        text-align: center;
+    }
+</style>
 <body>
 <div style="text-align: center;"><h1>All Manufacture</h1>
 <table border="1">
@@ -11,6 +36,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Country</th>
+        <th>Delete Button</th>
     </tr>
     <c:forEach var = "manufacturer" items="${manufacturers}">
         <tr>
