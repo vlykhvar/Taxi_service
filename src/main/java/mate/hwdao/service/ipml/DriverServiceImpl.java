@@ -1,10 +1,11 @@
-package mate.hwdao.service;
+package mate.hwdao.service.ipml;
 
 import java.util.List;
 import mate.hwdao.dao.DriverDao;
 import mate.hwdao.lib.Inject;
 import mate.hwdao.lib.Service;
 import mate.hwdao.model.Driver;
+import mate.hwdao.service.DriverService;
 
 @Service
 public class DriverServiceImpl implements DriverService {
