@@ -1,16 +1,15 @@
 package mate.hwdao.controllers;
 
-import mate.hwdao.Main;
-import mate.hwdao.lib.Injector;
-import mate.hwdao.model.Car;
-import mate.hwdao.service.CarService;
-
+import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
+import mate.hwdao.Main;
+import mate.hwdao.lib.Injector;
+import mate.hwdao.model.Car;
+import mate.hwdao.service.CarService;
 
 public class GetCarsByDriverController extends HttpServlet {
     private static final String DRIVER_ID = "driver_id";

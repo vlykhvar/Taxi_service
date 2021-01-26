@@ -18,7 +18,8 @@ import mate.hwdao.util.ConnectionUtil;
 public class DriverDaoJdbcImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
-        String query = "INSERT INTO drivers (name, license_number, login, password) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO drivers (name, license_number, login, password) "
+                + "VALUES (?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement
                          = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -61,8 +62,8 @@ public class DriverDaoJdbcImpl implements DriverDao {
         Driver driver = null;
         String query = "SELECT * FROM drivers WHERE deleted = FALSE AND login = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement preparedStatement
-                     = connection.prepareStatement(query)) {
+                 PreparedStatement preparedStatement
+                         = connection.prepareStatement(query)) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
