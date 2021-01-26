@@ -11,18 +11,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mate.hwdao.Main;
-import mate.hwdao.lib.Injector;
-import mate.hwdao.service.DriverService;
 
 public class AuthenticationFilter implements Filter {
     private static final String DRIVER_ID = "driver_id";
-    private static final Injector injector =
-            Injector.getInstance(Main.class.getPackageName());
     private static Set<String> availableUrls;
-    private final DriverService driverService =
-            (DriverService) injector.getInstance(DriverService.class);
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         availableUrls = new HashSet<>();

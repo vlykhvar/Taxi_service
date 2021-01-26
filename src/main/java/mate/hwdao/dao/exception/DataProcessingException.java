@@ -7,6 +7,6 @@ public class DataProcessingException extends RuntimeException {
     }
 
     public DataProcessingException(String message) {
-        System.out.println(message);
+        super(message);
     }
 }
