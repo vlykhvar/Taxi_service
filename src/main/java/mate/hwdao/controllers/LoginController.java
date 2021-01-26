@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import mate.hwdao.Main;
+import mate.hwdao.dao.exception.AuthenticationException;
 import mate.hwdao.lib.Injector;
 import mate.hwdao.model.Driver;
 import mate.hwdao.service.security.AuthenticationService;
@@ -32,7 +33,7 @@ public class LoginController extends HttpServlet {
             Driver driver = authenticationService.login(login, password);
             HttpSession session = req.getSession();
             session.setAttribute("driver_id", driver.getId());
-        } catch (ArithmeticException e) {
+        } catch (ArithmeticException | AuthenticationException e) {
             req.setAttribute("errorMsg", e.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/drivers/login.jsp").forward(req, resp);
             return;

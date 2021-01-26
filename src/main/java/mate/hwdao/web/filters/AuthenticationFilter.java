@@ -19,16 +19,16 @@ public class AuthenticationFilter implements Filter {
     private static final String DRIVER_ID = "driver_id";
     private static final Injector injector =
             Injector.getInstance(Main.class.getPackageName());
-    private static Set<String> initPage;
+    private static Set<String> availableUrls;
     private final DriverService driverService =
             (DriverService) injector.getInstance(DriverService.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        initPage = new HashSet<>();
-        initPage.add("/drivers/login");
-        initPage.add("/drivers/add");
-        initPage.add("/");
+        availableUrls = new HashSet<>();
+        availableUrls.add("/drivers/login");
+        availableUrls.add("/drivers/add");
+        availableUrls.add("/");
     }
 
     @Override
@@ -38,12 +38,12 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = req.getServletPath();
-        if (initPage.contains(url)) {
+        if (availableUrls.contains(url)) {
             filterChain.doFilter(req, response);
             return;
         }
         Long driverId = (Long) req.getSession().getAttribute(DRIVER_ID);
-        if (driverId == null || driverService.get(driverId) == null) {
+        if (driverId == null) {
             response.sendRedirect("/");
             return;
         }
