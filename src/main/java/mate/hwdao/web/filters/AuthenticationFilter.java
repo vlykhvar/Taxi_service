@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthenticationFilter implements Filter {
     private static final String DRIVER_ID = "driver_id";
     private static Set<String> availableUrls;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         availableUrls = new HashSet<>();
