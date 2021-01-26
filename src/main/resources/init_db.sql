@@ -6,9 +6,11 @@ CREATE TABLE `dao`.`manufactures` (
                                       PRIMARY KEY (`id`));
 CREATE TABLE `dao`.`drivers` (
                                  `id` BIGINT(11) NOT NULL AUTO_INCREMENT,
-                                 `name` VARCHAR(100) NULL,
+                                 `name` VARCHAR(45) NULL,
                                  `license_number` VARCHAR(45) NULL,
-                                 `deleted` BIT NULL DEFAULT false,
+                                 `deleted` VARCHAR(45) NULL DEFAULT 'false',
+                                 `login` VARCHAR(45) NULL,
+                                 `password` VARCHAR(45) NULL,
                                  PRIMARY KEY (`id`));
 
 CREATE TABLE `dao`.`cars` (
