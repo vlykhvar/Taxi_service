@@ -30,6 +30,12 @@
         Please provide driver's licence number: <label>
         <input type="text" name = licenceNumber> <br>
     </label>
+        Please provide driver's login: <label>
+        <input type="text" name = login> <br>
+    </label>
+        Please provide driver's password: <label>
+        <input type="password" name = pass> <br>
+    </label>
         <button type="submit">Add</button> <br>
     </form>
 </div>

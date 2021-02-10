@@ -1,4 +1,4 @@
-package mate.hwdao.service;
+package mate.hwdao.service.ipml;
 
 import java.util.List;
 import mate.hwdao.dao.CarDao;
@@ -6,6 +6,7 @@ import mate.hwdao.lib.Inject;
 import mate.hwdao.lib.Service;
 import mate.hwdao.model.Car;
 import mate.hwdao.model.Driver;
+import mate.hwdao.service.CarService;
 
 @Service
 public class CarServiceImpl implements CarService {

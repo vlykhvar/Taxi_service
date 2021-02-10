@@ -18,12 +18,15 @@ import mate.hwdao.util.ConnectionUtil;
 public class DriverDaoJdbcImpl implements DriverDao {
     @Override
     public Driver create(Driver driver) {
-        String query = "INSERT INTO drivers (name, license_number) VALUES (?, ?)";
+        String query = "INSERT INTO drivers (name, license_number, login, password) "
+                + "VALUES (?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement
                          = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, driver.getName());
             preparedStatement.setString(2, driver.getLicenseNumber());
+            preparedStatement.setString(3, driver.getLogin());
+            preparedStatement.setString(4, driver.getPassword());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -55,6 +58,24 @@ public class DriverDaoJdbcImpl implements DriverDao {
     }
 
     @Override
+    public Optional<Driver> findByLogin(String login) {
+        Driver driver = null;
+        String query = "SELECT * FROM drivers WHERE deleted = FALSE AND login = ?";
+        try (Connection connection = ConnectionUtil.getConnection();
+                 PreparedStatement preparedStatement
+                         = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                driver = getDriver(resultSet);
+            }
+        } catch (SQLException ex) {
+            throw new DataProcessingException("Can't get driver with " + login, ex);
+        }
+        return Optional.ofNullable(driver);
+    }
+
+    @Override
     public List<Driver> getAll() {
         List<Driver> drivers = new ArrayList<>();
         String query = "SELECT * FROM drivers WHERE deleted = false";
@@ -73,7 +94,7 @@ public class DriverDaoJdbcImpl implements DriverDao {
 
     @Override
     public Driver update(Driver driver) {
-        String query = "UPDATE drivers SET name = ?, license_number = ?"
+        String query = "UPDATE drivers SET name = ?, license_number = ?, login = ? , password = ?"
                 + " WHERE id = ? AND deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement
@@ -81,6 +102,8 @@ public class DriverDaoJdbcImpl implements DriverDao {
             preparedStatement.setString(1, driver.getName());
             preparedStatement.setString(2, driver.getLicenseNumber());
             preparedStatement.setLong(3, driver.getId());
+            preparedStatement.setString(4, driver.getLogin());
+            preparedStatement.setString(5, driver.getPassword());
             if (preparedStatement.executeUpdate() > 0) {
                 return driver;
             }
@@ -110,6 +133,8 @@ public class DriverDaoJdbcImpl implements DriverDao {
         driver.setId(resultSet.getObject("id", Long.class));
         driver.setName(resultSet.getObject("name", String.class));
         driver.setLicenseNumber(resultSet.getObject("license_number", String.class));
+        driver.setLogin(resultSet.getObject("login", String.class));
+        driver.setPassword(resultSet.getObject("password", String.class));
         return driver;
     }
 }

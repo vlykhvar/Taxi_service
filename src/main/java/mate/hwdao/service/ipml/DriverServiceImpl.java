@@ -1,10 +1,13 @@
-package mate.hwdao.service;
+package mate.hwdao.service.ipml;
 
 import java.util.List;
+import java.util.Optional;
 import mate.hwdao.dao.DriverDao;
+import mate.hwdao.dao.exception.DataProcessingException;
 import mate.hwdao.lib.Inject;
 import mate.hwdao.lib.Service;
 import mate.hwdao.model.Driver;
+import mate.hwdao.service.DriverService;
 
 @Service
 public class DriverServiceImpl implements DriverService {
@@ -20,7 +23,7 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public Driver get(Long id) {
         return driverDao.get(id)
-               .orElseThrow(() -> new RuntimeException("Can't find car with id " + id));
+               .orElseThrow(() -> new DataProcessingException("Can't find car with id " + id));
     }
 
     @Override
@@ -36,5 +39,10 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public boolean delete(Long id) {
         return driverDao.delete(id);
+    }
+
+    @Override
+    public Optional<Driver> findByLogin(String login) {
+        return driverDao.findByLogin(login);
     }
 }

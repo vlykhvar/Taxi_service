@@ -1,10 +1,11 @@
-package mate.hwdao.service;
+package mate.hwdao.service.ipml;
 
 import java.util.List;
 import mate.hwdao.dao.ManufacturerDao;
 import mate.hwdao.lib.Inject;
 import mate.hwdao.lib.Service;
 import mate.hwdao.model.Manufacturer;
+import mate.hwdao.service.ManufacturerService;
 
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {

@@ -27,7 +27,9 @@ public class AddDriverController extends HttpServlet {
             throws ServletException, IOException {
         String name = request.getParameter("name");
         String licenseNumber = request.getParameter("licenceNumber");
-        driverService.create(new Driver(name, licenseNumber));
+        String login = request.getParameter("login");
+        String password = request.getParameter("pass");
+        driverService.create(new Driver(name, licenseNumber, login, password));
         request.setAttribute("message", "Driver was added");
         request.getRequestDispatcher("/WEB-INF/views/drivers/add.jsp").forward(request, response);
     }
